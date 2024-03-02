@@ -54,7 +54,7 @@
     $: render(), text, quality, scale;
 </script>
 <aside>
-<input bind:value={text}/>
+<input bind:value={text}/><br>
 <label for="quality"><span>BRATINESS</span><input name="quality" type="range" bind:value={quality} min=0.01 max=1 step=.001/> {~~((1-quality)*1000)}</label>
 <label for="scale"><span>SCALE</span><input name="scale" type="range" bind:value={scale} min=0 max=300 step=1/> {scale}</label>
 <a href={imageDataUrl} download="{text}_brat.jpg" class="download-button">download</a>
