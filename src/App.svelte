@@ -67,7 +67,7 @@
 <div style="font-family: Arial Narrow;">.</div>
 
 <aside>
-  <input bind:value={text} /><br />
+  <!-- <input bind:value={text} /><br /> -->
   <label for="quality"
     ><span>BRATINESS</span><input
       name="quality"
