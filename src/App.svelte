@@ -4,7 +4,7 @@
   let quality = 0.75;
   let scale = 100;
   let computedBg = "#8ACF00";
-
+  let hiddenInput = null;
   function render() {
     let offscreenCanvas = document.createElement("canvas");
     offscreenCanvas.width = 3 * scale;
@@ -54,6 +54,13 @@
     console.log("hi");
     render(); // Call render after the font is available
   });
+  function focusEnd(node) {
+    node.addEventListener("click", () => {
+      const value = node.value; // Store the current value
+      node.value = ""; // Clear the value
+      node.value = value; // Re-assign the value
+    });
+  }
   $: render(), text, quality, scale;
 </script>
 
@@ -88,7 +95,15 @@
   > or right click/hold and save image
 </aside>
 {#if imageDataUrl}
-  <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
+  <div style="position: relative;">
+    <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
+    <input
+      use:focusEnd
+      bind:this={hiddenInput}
+      bind:value={text}
+      id="hiddenInput"
+    />
+  </div>
 {/if}
 
 <style>
@@ -99,5 +114,18 @@
   #target {
     width: 600px;
     height: 600px;
+  }
+  #hiddenInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* visibility: hidden; */
+    background: transparent;
+    color: #000000;
+    opacity: 0.0001;
+    outline: none !important;
+    border: none;
   }
 </style>
