@@ -66,7 +66,7 @@
 
 <div style="font-family: Arial Narrow;">.</div>
 
-<aside>
+<aside on:click={hiddenInput.blur()}>
   <input
     bind:value={text}
     on:click={() => {
@@ -116,13 +116,13 @@
   :global(*) {
     font-family: "Arial Narrow" !important;
   }
- aside{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
+  /* aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 10;
- }
+  } */
   #target {
     width: 600px;
     height: 600px;
