@@ -65,7 +65,7 @@
 
 <style>
     * {
-        font-family: "Arial Narrow";
+        font-family: Arial Narrow;
     }
 
     #target {
