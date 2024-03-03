@@ -61,3 +61,12 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+@font-face {
+	font-family: 'Arial Narrow';
+	src: url('ArialNarrow.woff2') format('woff2'),
+			url('ArialNarrow.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
