@@ -116,7 +116,13 @@
   :global(*) {
     font-family: "Arial Narrow" !important;
   }
-
+ aside{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index: 10;
+ }
   #target {
     width: 600px;
     height: 600px;
@@ -130,7 +136,7 @@
     /* visibility: hidden; */
     background: transparent;
     color: #000000;
-    opacity: 0.0001;
+    opacity: 0.0000001;
     outline: none !important;
     border: none;
   }
