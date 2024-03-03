@@ -3,19 +3,22 @@
   let imageDataUrl;
   let quality = 0.75;
   let scale = 100;
+  let blur = 0.75;
   let computedBg = "#8ACF00";
+
+  const offscreenCanvas = document.createElement("canvas");
+  const ctx = offscreenCanvas.getContext("2d");
+
   let hiddenInput = null;
   let isFontLoaded = false;
   function render() {
-    let offscreenCanvas = document.createElement("canvas");
     offscreenCanvas.width = 3 * scale;
     offscreenCanvas.height = 2.5 * scale;
-
-    const ctx = offscreenCanvas.getContext("2d");
 
     // Set the background and draw text as before
     ctx.fillStyle = computedBg; // Use the computed background color
     ctx.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    ctx.filter = `blur(${(1 - blur) * 2}px)`;
     ctx.fillStyle = "black";
     ctx.font = "72px Arial Narrow";
     ctx.textAlign = "center";
@@ -29,16 +32,17 @@
     loadImageAndSampleColor(imageDataUrl);
   }
 
+  // Create a canvas to draw the image and sample its color
+  const canvas = document.createElement("canvas");
+  const imageCtx = canvas.getContext("2d");
+
   function loadImageAndSampleColor(dataUrl) {
     const img = new Image();
     img.onload = function () {
-      // Create a canvas to draw the image and sample its color
-      const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      document.body.style.backgroundColor = getBackgroundColor(ctx);
+      imageCtx.drawImage(img, 0, 0);
+      document.body.style.backgroundColor = getBackgroundColor(imageCtx);
     };
     img.src = dataUrl;
   }
@@ -67,7 +71,7 @@
     quality = 0.9; //bypass mem cache
     render();
   };
-  $: render(), text, quality, scale, isFontLoaded;
+  $: render(), text, quality, scale, blur, isFontLoaded;
   $: hiddenInput?.blur(), quality, scale;
 </script>
 
@@ -91,6 +95,17 @@
       step=".001"
     />
     {~~((1 - quality) * 1000)}</label
+  >
+  <label for="blur"
+    ><span>TIREDNESS</span><input
+      name="blur"
+      type="range"
+      bind:value={blur}
+      min="0"
+      max="1"
+      step=".001"
+    />
+    {~~((1 - blur) * 100)}</label
   >
   <label for="scale"
     ><span>SCALE</span><input
