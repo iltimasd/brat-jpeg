@@ -64,6 +64,7 @@
   }
   document.fonts.onloadingdone = () => {
     console.log("Font loading complete");
+    quality = 0.76; //bypass mem cache
     render();
   };
   $: render(), text, quality, scale, isFontLoaded;
