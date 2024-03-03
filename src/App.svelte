@@ -13,7 +13,7 @@
   let isFontLoaded = false;
   function render() {
     offscreenCanvas.width = 3 * scale;
-    offscreenCanvas.height = 2.5 * scale;
+    offscreenCanvas.height = 3 * scale;
 
     // Set the background and draw text as before
     ctx.fillStyle = computedBg; // Use the computed background color
@@ -23,7 +23,12 @@
     ctx.font = "72px Arial Narrow";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(text, offscreenCanvas.width / 2, offscreenCanvas.height / 2);
+
+    ctx.translate(offscreenCanvas.width / 2, offscreenCanvas.height / 2);
+    // Scale 80% on x-axis, 100% on y-axis
+    ctx.scale(0.8, 1);
+    // Draw the text at the origin, which is now the center of the canvas
+    ctx.fillText(text, 0, 0);
 
     // Generate the image data URL
     imageDataUrl = offscreenCanvas.toDataURL("image/jpeg", quality);
