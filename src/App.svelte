@@ -130,7 +130,6 @@
 {#if imageDataUrl}
   <div style="position: relative; z-index:1">
     <input
-      autofocus
       use:focusEnd
       bind:this={hiddenInput}
       bind:value={text}
