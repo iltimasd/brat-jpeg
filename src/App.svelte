@@ -85,7 +85,7 @@
   >
   <a href={imageDataUrl} download="{text}_brat.jpg" class="download-button"
     >download</a
-  >
+  > or right click/hold and save image
 </aside>
 {#if imageDataUrl}
   <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
