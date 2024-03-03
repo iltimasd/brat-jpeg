@@ -64,7 +64,7 @@
   }
   document.fonts.onloadingdone = () => {
     console.log("Font loading complete");
-    quality = 0.76; //bypass mem cache
+    quality = 0.9; //bypass mem cache
     render();
   };
   $: render(), text, quality, scale, isFontLoaded;
@@ -109,13 +109,21 @@
 </aside>
 {#if imageDataUrl}
   <div style="position: relative;">
-    <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
     <input
       autofocus
       use:focusEnd
       bind:this={hiddenInput}
       bind:value={text}
       id="hiddenInput"
+    />
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <img
+      id="target"
+      src={imageDataUrl}
+      alt="Rendered Canvas"
+      on:click={() => {
+        // hiddenInput.focus();
+      }}
     />
   </div>
 {/if}
@@ -134,6 +142,7 @@
   #target {
     width: 600px;
     height: 600px;
+    z-index: 10;
   }
   #hiddenInput {
     position: absolute;
@@ -147,5 +156,9 @@
     opacity: 0.0000001;
     outline: none !important;
     border: none;
+    z-index: 5;
+  }
+  input[type="range"] {
+    direction: rtl;
   }
 </style>
