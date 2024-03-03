@@ -9,6 +9,8 @@
   const offscreenCanvas = document.createElement("canvas");
   const ctx = offscreenCanvas.getContext("2d");
 
+  let hiddenInput = null;
+  let isFontLoaded = false;
   function render() {
     offscreenCanvas.width = 3 * scale;
     offscreenCanvas.height = 2.5 * scale;
@@ -57,13 +59,32 @@
     console.log("hi");
     render(); // Call render after the font is available
   });
-  $: render(), text, quality, scale, blur;
+  function focusEnd(node) {
+    node.addEventListener("click", () => {
+      const value = node.value; // Store the current value
+      node.value = ""; // Clear the value
+      node.value = value; // Re-assign the value
+    });
+  }
+  document.fonts.onloadingdone = () => {
+    console.log("Font loading complete");
+    quality = 0.9; //bypass mem cache
+    render();
+  };
+  $: render(), text, quality, scale, blur, isFontLoaded;
+  $: hiddenInput?.blur(), quality, scale;
 </script>
 
 <div style="font-family: Arial Narrow;">.</div>
 
 <aside>
-  <input bind:value={text} /><br />
+  <input
+    bind:value={text}
+    on:click={() => {
+      hiddenInput.focus();
+    }}
+  /><br />
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <label for="quality"
     ><span>BRATINESS</span><input
       name="quality"
@@ -102,16 +123,57 @@
   > or right click/hold and save image
 </aside>
 {#if imageDataUrl}
-  <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
+  <div style="position: relative;">
+    <input
+      autofocus
+      use:focusEnd
+      bind:this={hiddenInput}
+      bind:value={text}
+      id="hiddenInput"
+    />
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <img
+      id="target"
+      src={imageDataUrl}
+      alt="Rendered Canvas"
+      on:click={() => {
+        // hiddenInput.focus();
+      }}
+    />
+  </div>
 {/if}
 
 <style>
   :global(*) {
     font-family: "Arial Narrow" !important;
   }
-
+  /* aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  } */
   #target {
     width: 600px;
     height: 600px;
+    z-index: 10;
+  }
+  #hiddenInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* visibility: hidden; */
+    background: transparent;
+    color: #000000;
+    opacity: 0.0000001;
+    outline: none !important;
+    border: none;
+    z-index: 5;
+  }
+  input[type="range"] {
+    direction: rtl;
   }
 </style>
