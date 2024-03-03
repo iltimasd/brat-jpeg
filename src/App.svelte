@@ -3,6 +3,7 @@
   let imageDataUrl;
   let quality = 0.75;
   let scale = 100;
+  let blur = 0.5;
   let computedBg = "#8ACF00";
 
   function render() {
@@ -15,6 +16,7 @@
     // Set the background and draw text as before
     ctx.fillStyle = computedBg; // Use the computed background color
     ctx.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
+    ctx.filter = `blur(${blur}px)`;
     ctx.fillStyle = "black";
     ctx.font = "72px Arial Narrow";
     ctx.textAlign = "center";
@@ -54,7 +56,7 @@
     console.log("hi");
     render(); // Call render after the font is available
   });
-  $: render(), text, quality, scale;
+  $: render(), text, quality, scale, blur;
 </script>
 
 <div style="font-family: Arial Narrow;">.</div>
@@ -71,6 +73,17 @@
       step=".001"
     />
     {~~((1 - quality) * 1000)}</label
+  >
+  <label for="blur"
+    ><span>TIREDNESS</span><input
+      name="blur"
+      type="range"
+      bind:value={blur}
+      min="0.01"
+      max="2"
+      step=".001"
+    />
+    {~~(blur * 100)}</label
   >
   <label for="scale"
     ><span>SCALE</span><input
