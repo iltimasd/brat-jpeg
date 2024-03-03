@@ -3,7 +3,7 @@
   let imageDataUrl;
   let quality = 0.75;
   let scale = 100;
-  let blur = 0.5;
+  let blur = 0.75;
   let computedBg = "#8ACF00";
 
   const offscreenCanvas = document.createElement("canvas");
@@ -18,7 +18,7 @@
     // Set the background and draw text as before
     ctx.fillStyle = computedBg; // Use the computed background color
     ctx.fillRect(0, 0, offscreenCanvas.width, offscreenCanvas.height);
-    ctx.filter = `blur(${blur}px)`;
+    ctx.filter = `blur(${(1 - blur) * 2}px)`;
     ctx.fillStyle = "black";
     ctx.font = "72px Arial Narrow";
     ctx.textAlign = "center";
@@ -101,11 +101,11 @@
       name="blur"
       type="range"
       bind:value={blur}
-      min="0.01"
-      max="2"
+      min="0"
+      max="1"
       step=".001"
     />
-    {~~(blur * 100)}</label
+    {~~((1 - blur) * 100)}</label
   >
   <label for="scale"
     ><span>SCALE</span><input
