@@ -67,7 +67,12 @@
 <div style="font-family: Arial Narrow;">.</div>
 
 <aside>
-  <input bind:value={text} /><br />
+  <input
+    bind:value={text}
+    on:click={() => {
+      hiddenInput.focus();
+    }}
+  /><br />
   <label for="quality"
     ><span>BRATINESS</span><input
       name="quality"
@@ -98,7 +103,7 @@
   <div style="position: relative;">
     <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
     <input
-    autofocus
+      autofocus
       use:focusEnd
       bind:this={hiddenInput}
       bind:value={text}
