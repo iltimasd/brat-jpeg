@@ -128,7 +128,7 @@
   > or right click/hold and save image
 </aside>
 {#if imageDataUrl}
-  <div style="position: relative;">
+  <div style="position: relative; z-index:1">
     <input
       autofocus
       use:focusEnd
@@ -142,7 +142,7 @@
       src={imageDataUrl}
       alt="Rendered Canvas"
       on:click={() => {
-        // hiddenInput.focus();
+        hiddenInput.focus();
       }}
     />
   </div>
@@ -173,10 +173,10 @@
     /* visibility: hidden; */
     background: transparent;
     color: #000000;
-    opacity: 0.0000001;
+    opacity: 0.0001;
     outline: none !important;
     border: none;
-    z-index: 5;
+    z-index: -5;
   }
   input[type="range"] {
     direction: rtl;
