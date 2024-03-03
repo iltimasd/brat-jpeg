@@ -98,6 +98,7 @@
   <div style="position: relative;">
     <img id="target" src={imageDataUrl} alt="Rendered Canvas" />
     <input
+    autofocus
       use:focusEnd
       bind:this={hiddenInput}
       bind:value={text}
