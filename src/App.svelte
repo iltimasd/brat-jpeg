@@ -6,12 +6,12 @@
   let blur = 0.5;
   let computedBg = "#8ACF00";
 
+  const offscreenCanvas = document.createElement("canvas");
+  const ctx = offscreenCanvas.getContext("2d");
+
   function render() {
-    let offscreenCanvas = document.createElement("canvas");
     offscreenCanvas.width = 3 * scale;
     offscreenCanvas.height = 2.5 * scale;
-
-    const ctx = offscreenCanvas.getContext("2d");
 
     // Set the background and draw text as before
     ctx.fillStyle = computedBg; // Use the computed background color
@@ -30,16 +30,17 @@
     loadImageAndSampleColor(imageDataUrl);
   }
 
+  // Create a canvas to draw the image and sample its color
+  const canvas = document.createElement("canvas");
+  const imageCtx = canvas.getContext("2d");
+
   function loadImageAndSampleColor(dataUrl) {
     const img = new Image();
     img.onload = function () {
-      // Create a canvas to draw the image and sample its color
-      const canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0);
-      document.body.style.backgroundColor = getBackgroundColor(ctx);
+      imageCtx.drawImage(img, 0, 0);
+      document.body.style.backgroundColor = getBackgroundColor(imageCtx);
     };
     img.src = dataUrl;
   }
