@@ -104,9 +104,6 @@
   $: render(), text, quality, scale, blur, isFontLoaded, selectedColor;
   $: hiddenInput?.blur(), quality, scale;
 </script>
-
-<div style="font-family: Arial Narrow;">.</div>
-
 <aside>
   <textarea
     bind:value={text}
