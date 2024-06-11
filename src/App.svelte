@@ -15,7 +15,6 @@
     { bg: "#D30002", text: "red", name: "number 1 angel" },
     { bg: "#F5ABCC", text: "white", name: "sucker" },
     { bg: "#700150", text: "white", name: "true romance" },
-
   ];
 
   let selectedColor = colors[0];
@@ -27,8 +26,10 @@
   let isFontLoaded = false;
 
   function render() {
+    const lines = text.split("\n"); // Split the text by new lines
+    const lineHeight = 72; // Adjust line height as needed
     offscreenCanvas.width = 3 * scale;
-    offscreenCanvas.height = 3 * scale;
+    offscreenCanvas.height = 3 * scale + (lines.length - 1) * lineHeight;
 
     // Set the background and draw text as before
     ctx.fillStyle = selectedColor.bg; // Use the selected background color
@@ -39,9 +40,17 @@
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.translate(offscreenCanvas.width / 2, offscreenCanvas.height / 2);
-    ctx.scale(0.8, 1);
-    ctx.fillText(text, 0, 0);
+    ctx.translate(
+      offscreenCanvas.width / 2,
+      offscreenCanvas.height / 2 - ((lines.length - 1) * lineHeight) / 2
+    );
+
+    lines.forEach((line, index) => {
+      ctx.save();
+      ctx.scale(0.8, 1);
+      ctx.fillText(line, 0, index * lineHeight);
+      ctx.restore();
+    });
 
     // Generate the image data URL
     imageDataUrl = offscreenCanvas.toDataURL("image/jpeg", quality);
@@ -81,9 +90,8 @@
 
   function focusEnd(node) {
     node.addEventListener("click", () => {
-      const value = node.value; // Store the current value
-      node.value = ""; // Clear the value
-      node.value = value; // Re-assign the value
+      node.selectionStart = node.selectionEnd = node.value.length;
+      node.scrollTop = node.scrollHeight; // Ensure the textarea scrolls to the bottom
     });
   }
 
@@ -104,6 +112,7 @@
     bind:value={text}
     on:click={() => {
       hiddenInput.focus();
+      hiddenInput.scrollIntoView({ behavior: "smooth" }); // Ensure smooth scrolling to the second textarea
     }}
   /><br />
   <span>ALBUM</span>
@@ -178,6 +187,7 @@
       alt="Rendered Canvas"
       on:click={() => {
         hiddenInput.focus();
+        hiddenInput.scrollIntoView({ behavior: "smooth" }); // Ensure smooth scrolling to the second textarea
       }}
     />
   </div>
