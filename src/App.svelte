@@ -13,6 +13,7 @@
     { bg: "#908A84", text: "black", name: "chali" },
     { bg: "#C9A1DD", text: "black", name: "pop 2" },
     { bg: "#D30002", text: "red", name: "number 1 angel" },
+    { bg: "black", text: "#333333", name: "vroom vroom"},
     { bg: "#F5ABCC", text: "white", name: "sucker" },
     { bg: "#700150", text: "white", name: "true romance" },
   ];
@@ -112,7 +113,7 @@
       hiddenInput.scrollIntoView({ behavior: "smooth" }); // Ensure smooth scrolling to the second textarea
     }}
   /><br />
-  <span>ALBUM</span>
+  <span>RELEASE</span>
   {#each colors as color, index}
     <label style="display: inline-block;">
       <input
