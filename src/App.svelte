@@ -192,7 +192,7 @@
   </div>
 {/if}
 <div
-  style="position: absolute; top: 10px; right: 10px; font-size: 12px; color: rgba(127, 127, 127, 0.7);; text-align: right;"
+  style="position: absolute; top: 10px; right: 10px; font-size: 12px; color: rgba(127, 127, 127, 0.7); text-decoration:underline; text-align: right;"
 >
   <a
     href="https://twitter.com/iltimasdoha"
