@@ -192,12 +192,12 @@
   </div>
 {/if}
 <div
-  style="position: absolute; top: 10px; right: 10px; font-size: 12px; color: rgba(127, 127, 127, 0.7); text-decoration:underline; text-align: right;"
+  style="position: absolute; top: 10px; right: 10px; font-size: 12px; color: rgba(255,255,255, 1); text-decoration:underline; text-align: right; mix-blend-mode:exclusion"
 >
   <a
     href="https://twitter.com/iltimasdoha"
     target="_blank"
-    style="color: rgba(127, 127, 127, 0.7);"
+    style="color: rgba(255,255,255, 1);"
   >
     cooked by @iltimasdoha
     </a
