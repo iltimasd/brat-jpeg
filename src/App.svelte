@@ -21,7 +21,7 @@
   let selectedColor = colors[0];
 
   const offscreenCanvas = document.createElement("canvas");
-  const ctx = offscreenCanvas.getContext("2d");
+  const ctx = offscreenCanvas.getContext("2d", { willReadFrequently: true });
 
   let hiddenInput = null;
   let isFontLoaded = false;
@@ -62,7 +62,7 @@
 
   // Create a canvas to draw the image and sample its color
   const canvas = document.createElement("canvas");
-  const imageCtx = canvas.getContext("2d");
+  const imageCtx = canvas.getContext("2d",{ willReadFrequently: true });
 
   function loadImageAndSampleColor(dataUrl) {
     const img = new Image();
@@ -85,7 +85,9 @@
   }
 
   document.fonts.load('72pt "Arial Narrow"').then(() => {
-    console.log("hi");
+    console.log(
+      "hello fellow dev. code is here: https://github.com/iltimasd/brat-jpeg"
+    );
     render(); // Call render after the font is available
   });
 
@@ -200,8 +202,7 @@
     style="color: rgba(255,255,255, 1);"
   >
     cooked by @iltimasdoha
-    </a
-  >
+  </a>
 </div>
 
 <style>
