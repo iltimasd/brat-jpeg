@@ -13,7 +13,7 @@
     { bg: "#908A84", text: "black", name: "chali" },
     { bg: "#C9A1DD", text: "black", name: "pop 2" },
     { bg: "#D30002", text: "red", name: "number 1 angel" },
-    { bg: "black", text: "#333333", name: "vroom vroom"},
+    { bg: "black", text: "#333333", name: "vroom vroom" },
     { bg: "#F5ABCC", text: "white", name: "sucker" },
     { bg: "#700150", text: "white", name: "true romance" },
   ];
@@ -105,6 +105,7 @@
   $: render(), text, quality, scale, blur, isFontLoaded, selectedColor;
   $: hiddenInput?.blur(), quality, scale;
 </script>
+
 <aside>
   <textarea
     bind:value={text}
@@ -190,6 +191,18 @@
     />
   </div>
 {/if}
+<div
+  style="position: absolute; top: 10px; right: 10px; font-size: 12px; color: rgba(127, 127, 127, 0.7);; text-align: right;"
+>
+  <a
+    href="https://twitter.com/iltimasdoha"
+    target="_blank"
+    style="color: rgba(127, 127, 127, 0.7);"
+  >
+    cooked by @iltimasdoha
+    </a
+  >
+</div>
 
 <style>
   :global(*) {
