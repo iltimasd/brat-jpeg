@@ -26,6 +26,15 @@
   let hiddenInput = null;
   let isFontLoaded = false;
 
+  function resizeCanvas(originalCanvas, width, height) {
+    const resizedCanvas = document.createElement("canvas");
+    resizedCanvas.width = width;
+    resizedCanvas.height = height;
+    const resizedCtx = resizedCanvas.getContext("2d");
+    resizedCtx.drawImage(originalCanvas, 0, 0, width, height);
+    return resizedCanvas.toDataURL("image/jpeg", quality);
+  }
+
   function render() {
     const lines = text.split("\n"); // Split the text by new lines
     const lineHeight = 72; // Adjust line height as needed
@@ -53,8 +62,8 @@
       ctx.restore();
     });
 
-    // Generate the image data URL
-    imageDataUrl = offscreenCanvas.toDataURL("image/jpeg", quality);
+    // Generate the image data URL from the resized canvas
+    imageDataUrl = resizeCanvas(offscreenCanvas, 600, 600);
 
     // When the image data is ready, load it into an <img> and then sample its color
     loadImageAndSampleColor(imageDataUrl);
