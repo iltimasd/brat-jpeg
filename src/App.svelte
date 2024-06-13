@@ -1,4 +1,5 @@
 <script lang="ts">
+  let zoraPromise: null | Promise<void>;
   let text = "brat";
   let imageDataUrl: string;
   let quality = 0.75;
@@ -190,6 +191,8 @@
   </a>
   or right click/hold and save image
   <br />
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-missing-attribute -->
   <a
     on:click={async () => {
       try {
@@ -206,6 +209,9 @@
         }
 
         const url = await response.text(); // Assuming the response is in JSON format
+        const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+        zoraPromise = delay(10000);
+        await zoraPromise;
         window.open(
           `https://zora.co/create?name=${encodeURIComponent(text.replace(/\n/g, " "))}&description=${encodeURIComponent(text)}&image=ipfs://${url}&referrer=0xBb11D9b4E27c5Be11a9b02C492E6810Aa66954B6`,
           "_blank"
@@ -216,8 +222,16 @@
     }}
     style="cursor:pointer"
   >
-    or post to <span><img src="./Zorb.png" /></span>
-    zora <sub>takes about 30s to load</sub>
+    {#if zoraPromise}
+      {#await zoraPromise}
+        loading
+      {:then _}
+        finish in other tab
+      {/await}
+    {:else}
+      or post to <span><img src="./Zorb.png" /></span>
+      zora <sub>takes about 30s to load</sub>
+    {/if}
   </a>
 </aside>
 {#if imageDataUrl}
