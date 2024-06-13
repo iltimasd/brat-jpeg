@@ -190,7 +190,7 @@
   </a>
   or right click/hold and save image
   <br />
-  <button
+  <a
     on:click={async () => {
       try {
         const response = await fetch("/api/ipfs", {
@@ -207,16 +207,18 @@
 
         const url = await response.text(); // Assuming the response is in JSON format
         window.open(
-          `https://zora.co/create?name=internet&description=internet&image=ipfs://${url}&referrer=0xBb11D9b4E27c5Be11a9b02C492E6810Aa66954B6`,
+          `https://zora.co/create?name=${encodeURIComponent(text.replace(/\n/g, " "))}&description=${encodeURIComponent(text)}&image=https://gray-defeated-reindeer-92.mypinata.cloud/ipfs/${url}&referrer=0xBb11D9b4E27c5Be11a9b02C492E6810Aa66954B6`,
           "_blank"
         ); // Opens the URL in a new tab
       } catch (error) {
         console.error("Error:", error);
       }
     }}
+    style="cursor:pointer"
   >
-    zora
-  </button>
+    or upload to <span><img src="./Zorb.png" /></span>
+    zora <sub>takes about 30s to load</sub>
+  </a>
 </aside>
 {#if imageDataUrl}
   <div style="position: relative; z-index: 1">
