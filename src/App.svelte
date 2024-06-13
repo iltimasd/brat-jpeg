@@ -71,7 +71,7 @@
 
   // Create a canvas to draw the image and sample its color
   const canvas = document.createElement("canvas");
-  const imageCtx = canvas.getContext("2d",{ willReadFrequently: true });
+  const imageCtx = canvas.getContext("2d", { willReadFrequently: true });
 
   function loadImageAndSampleColor(dataUrl) {
     const img = new Image();
@@ -180,7 +180,35 @@
   </label>
   <a href={imageDataUrl} download="{text}_brat.jpg" class="download-button">
     download
-  </a> or right click/hold and save image
+  </a>
+  or right click/hold and save image
+  <br />
+  <button
+    on:click={async () => {
+      try {
+        const response = await fetch("/api/ipfs", {
+          body: imageDataUrl,
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const url = await response.text(); // Assuming the response is in JSON format
+        window.open(
+          `https://zora.co/create?name=internet&description=internet&image=ipfs://${url}`, "_self"
+        ); // Opens the URL in a new tab
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }}
+  >
+    zora
+  </button>
 </aside>
 {#if imageDataUrl}
   <div style="position: relative; z-index: 1">
