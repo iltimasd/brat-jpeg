@@ -79,7 +79,7 @@ import { drawText } from 'canvas-txt';
     font: 'Arial Narrow',
     align: center?'center':'left',
     vAlign: 'middle',
-    debug: true
+    // debug: true
       });
 
   // Generate the image data URL from the resized canvas
@@ -208,7 +208,7 @@ import { drawText } from 'canvas-txt';
       bind:checked={center}
 
     />
-    {center}
+    {center? "its the same" : "so its not"}
   </label>
   <a href={imageDataUrl} download="{text}_brat.jpg" class="download-button">
     download
