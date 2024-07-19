@@ -176,7 +176,7 @@ import { drawText } from 'canvas-txt';
       max="1"
       step=".001"
     />
-    {~~((1 - quality) * 1000)} {quality}
+    {~~((1 - quality) * 1000)}
   </label>
   <label for="blur">
     <span>TIREDNESS</span>
@@ -196,7 +196,7 @@ import { drawText } from 'canvas-txt';
       name="scale"
       type="range"
       bind:value={scale}
-      min="0"
+      min="1"
       max="300"
       step="1"
     />
