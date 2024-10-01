@@ -17,7 +17,7 @@
     { bg: "#8ACF00", text: "black", name: "brat" },
     { bg: "#039AD9", text: "red", name: "crash" },
     { bg: "white", text: "#C5C5C5", name: "how im feeling now" },
-    { bg: "#908A84", text: "black", name: "chali" },
+    { bg: "#908A84", text: "black", name: "charli" },
     { bg: "#C9A1DD", text: "black", name: "pop 2" },
     { bg: "#D30002", text: "red", name: "number 1 angel" },
     { bg: "black", text: "#333333", name: "vroom vroom" },
